@@ -1,0 +1,11 @@
+[Unit]
+Description=A basic service to start the client on the ROV
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 /home/opt/uart.py
+
+[Install]
+WantedBy=multi-user.target
