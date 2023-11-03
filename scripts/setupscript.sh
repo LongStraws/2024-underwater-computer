@@ -2,8 +2,6 @@
 
 SETUP_REPO=https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/scope-1-ubuntu
 
-set -e
-
 apt-get update && apt-get upgrade -y
 
 systemctl disable snapd.service
