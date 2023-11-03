@@ -4,7 +4,7 @@ set -e
 
 SETUP_REPO=https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/scope-1-ubuntu
 
-apt-get update && apt-get upgrade -y
+#apt-get update && apt-get upgrade -y
 
 curl -fsSL https://raw.githubusercontent.com/DeepwaterExploration/DWE_OS/main/scripts/install-docker.sh | bash -
 
