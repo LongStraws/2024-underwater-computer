@@ -6,6 +6,8 @@ SETUP_REPO=https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-comp
 
 apt-get update && apt-get upgrade -y
 
+echo 0
+
 curl -fsSL https://raw.githubusercontent.com/DeepwaterExploration/DWE_OS/main/scripts/install-docker.sh | bash -
 
 echo 1
