@@ -19,8 +19,6 @@ curl -fsSL --output-dir /opt --remote-name-all $SETUP_REPO/clientClass.py $SETUP
 
 curl -fsSL $SETUP_REPO/scripts/60_static_config.yaml -o /etc/netplan/60_static_config.yaml
 
-echo -e "dtoverlay=disable-wifi\ndtoverlay=disable-bt\n[all]" >> /boot/firmware/config.txt
-
 systemctl daemon-reload
 systemctl enable rov-client.service
 systemctl start rov-client.service
@@ -37,5 +35,7 @@ systemctl disable hciuart
 systemctl disable iscsi.service
 
 touch /etc/cloud/cloud-init.disabled
+
+echo -e "dtoverlay=disable-wifi\ndtoverlay=disable-bt\n[all]" >> /boot/firmware/config.txt
 
 echo "Done. Upon next reboot system will have ip 192.168.0.20."
