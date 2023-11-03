@@ -8,16 +8,16 @@ apt-get update && apt-get upgrade -y
 
 curl -fsSL https://raw.githubusercontent.com/DeepwaterExploration/DWE_OS/main/scripts/install-docker.sh | bash -
 
-curl --output-dir /opt --remote-name-all $SETUP_REPO/clientClass.py $SETUP_REPO/uart.py
+curl -fsSL --output-dir /opt --remote-name-all $SETUP_REPO/clientClass.py $SETUP_REPO/uart.py
 
 client_service_file="/usr/lib/systemd/system/rov-client.service"
 if [ -f "$client_service_file" ] ; then
     rm "$client_service_file"
 fi
 
-curl $SETUP_REPO/scripts/rov-client.service -o /usr/lib/systemd/system/rov-client.service
+curl -fsSL $SETUP_REPO/scripts/rov-client.service -o /usr/lib/systemd/system/rov-client.service
 
-curl $SETUP_REPO/scripts/60_static_config.yaml -o /etc/netplan/60_static_config.yaml
+curl -fsSL $SETUP_REPO/scripts/60_static_config.yaml -o /etc/netplan/60_static_config.yaml
 
 echo -e "dtoverlay=disable-wifi\ndtoverlay=disable-bt\n[all]" >> /boot/firmware/config.txt
 
