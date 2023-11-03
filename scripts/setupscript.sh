@@ -15,9 +15,9 @@ if [ -f "$client_service_file" ] ; then
     rm "$client_service_file"
 fi
 
-curl $REPO/scripts/rov-client.service -o /usr/lib/systemd/system/rov-client.service
+curl $SETUP_REPO/scripts/rov-client.service -o /usr/lib/systemd/system/rov-client.service
 
-curl $REPO/scripts/60_static_config.yaml -o /etc/netplan/60_static_config.yaml
+curl $SETUP_REPO/scripts/60_static_config.yaml -o /etc/netplan/60_static_config.yaml
 
 echo -e "dtoverlay=disable-wifi\ndtoverlay=disable-bt\n[all]" >> /boot/firmware/config.txt
 
