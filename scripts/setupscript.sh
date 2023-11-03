@@ -1,7 +1,5 @@
 #!/bin/bash
 
-SETUP_REPO=https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/scope-1-ubuntu
-
 set -e
 
 apt-get update && apt-get upgrade -y
@@ -14,6 +12,8 @@ client_service_file="/usr/lib/systemd/system/rov-client.service"
 if [ -f "$client_service_file" ] ; then
     rm "$client_service_file"
 fi
+
+SETUP_REPO=https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/scope-1-ubuntu
 
 curl -fsSL $SETUP_REPO/scripts/rov-client.service -o /usr/lib/systemd/system/rov-client.service
 
