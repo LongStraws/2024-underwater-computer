@@ -1,6 +1,6 @@
 [Unit]
 Description=A basic service to start the client on the ROV
-After=network-online.target
+After=network.target
 
 [Service]
 Type=simple
