@@ -12,7 +12,7 @@ def start_UART_relay(_serial, _client, _printable=False):
             if _printable and (b'#AAM' in message): print(message)
             _client.send(message)
 
-serial_mcu = serial.Serial('/dev/ttyAMA0', baudrate, timeout=1)
+serial_mcu = serial.Serial('/dev/ttyACM0', baudrate, timeout=1)
 #debug_mcu = serial.Serial('/dev/ttyAMA1', baudrate, timeout=1)
 
 thread_alive = True
