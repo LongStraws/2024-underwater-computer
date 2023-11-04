@@ -8,11 +8,11 @@ echo "Installing docker if not already installed"
 docker --version || curl -fsSL https://get.docker.com/ | sh
 systemctl enable docker
 
-# Pull docker image
+# Pull DWE-controls docker image
 echo "Pulling docker image"
 docker pull brandondwe/dwe-controls
 
-# Create docker image
+# Create DWE-controls docker image
 echo "Creating docker image"
 if [ "$(docker ps -q -f name=dwe-controls)" ]; then
     docker rm dwe-controls --force
@@ -53,7 +53,7 @@ echo "Installation of dwe-controls with docker was successful. Please navigate t
 
 systemctl enable rov-client.service
 systemctl start rov-client.service
-echo "Installation of ROV client was successful. Running on 192.168.0.21:9000 with serial port /dev/ttyACM0"
+echo "Installation of ROV client was successful. Attached to 192.168.0.21:9000 with serial port /dev/ttyACM0"
 
 CONFIG_FILE=/boot/firmware/config.txt
 CONFIG_STRING=dtoverlay=disable-wifi\ndtoverlay=disable-bt\n[all]
