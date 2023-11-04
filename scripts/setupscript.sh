@@ -4,10 +4,6 @@ set -e
 
 DWE_REPO=https://raw.githubusercontent.com/DeepwaterExploration/DWE_OS/main
 
-echo "Installing docker if not already installed"
-docker --version || curl -fsSL https://get.docker.com/ | sh
-systemctl enable docker
-
 # Pull DWE-controls docker image
 echo "Pulling DWE-controls docker image"
 docker pull brandondwe/dwe-controls
@@ -42,9 +38,6 @@ if [ -f "$ROV_SERVICE_FILE" ] ; then
 fi
 curl -fsSL $KELPIE_REPO/scripts/rov-client.service -o /usr/lib/systemd/system/rov-client.service
 
-echo "Setting static IP"
-curl -fsSL $KELPIE_REPO/scripts/60_static_config.yaml -o /etc/netplan/60_static_config.yaml
-
 systemctl daemon-reload
 
 systemctl enable dwe-controls
@@ -55,38 +48,6 @@ systemctl enable rov-client.service
 systemctl start rov-client.service
 echo "Installation of ROV client was successful. Attached to 192.168.0.21:9000 with serial port /dev/ttyACM0"
 
-CONFIG_FILE="/boot/firmware/config.txt"
-CONFIG_WIFI_STRING="dtoverlay=disable-wifi"
-CONFIG_BT_STRING="dtoverlay=disable-bt"
-
-echo "Disabling wifi and bluetooth"
-if ! grep -q "$CONFIG_WIFI_STRING" "$CONFIG_FILE"; then
-    echo "$CONFIG_WIFI_STRING" >> "$CONFIG_FILE"
-fi
-
-if ! grep -q "$CONFIG_BT_STRING" "$CONFIG_FILE"; then
-    echo "$CONFIG_BT_STRING" >> "$CONFIG_FILE"
-fi
-
-if ! [ $(tail -n 1 "$CONFIG_FILE") = "[all]" ] ; then
-    echo "[all]" >> "$CONFIG_FILE"
-fi
-
 echo "Disabling services to speed up boot"
-systemctl disable snapd.service
-systemctl disable snapd.socket
-systemctl disable snapd.seeded.service
-systemctl disable snap.lxd.activate.service
-systemctl disable apparmor
-systemctl disable snapd.apparmor.service
-systemctl mask snapd.service
-
-systemctl disable hciuart
-
-if [ -f "/etc/systemd/system/iscsi.service." ] ; then
-    systemctl disable iscsi.service
-fi
-
-touch /etc/cloud/cloud-init.disabled
 
 echo "Done. Upon next reboot system will have ip 192.168.0.20."
