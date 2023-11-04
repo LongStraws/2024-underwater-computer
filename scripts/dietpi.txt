@@ -131,7 +131,9 @@ AUTO_SETUP_GLOBAL_PASSWORD=kelpi3
 # - DietPi will automatically install all dependencies, like ALSA/X11 for desktops etc.
 # - E.g. the following (without the leading "#") will install the LXDE desktop automatically on first boot:
 #AUTO_SETUP_INSTALL_SOFTWARE_ID=23
+#Install docker
 AUTO_SETUP_INSTALL_SOFTWARE_ID=162
+#Install pip
 AUTO_SETUP_INSTALL_SOFTWARE_ID=130
 
 #------------------------------------------------------------------------------------------------------
