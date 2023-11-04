@@ -47,7 +47,3 @@ echo "Installation of dwe-controls with docker was successful. Please navigate t
 systemctl enable rov-client.service
 systemctl start rov-client.service
 echo "Installation of ROV client was successful. Attached to 192.168.0.21:9000 with serial port /dev/ttyACM0"
-
-echo "Disabling services to speed up boot"
-
-echo "Done. Upon next reboot system will have ip 192.168.0.20."
