@@ -9,11 +9,11 @@ docker --version || curl -fsSL https://get.docker.com/ | sh
 systemctl enable docker
 
 # Pull DWE-controls docker image
-echo "Pulling docker image"
+echo "Pulling DWE-controls docker image"
 docker pull brandondwe/dwe-controls
 
-# Create DWE-controls docker image
-echo "Creating docker image"
+# Create DWE-controls docker container
+echo "Creating DWE-controls docker container"
 if [ "$(docker ps -q -f name=dwe-controls)" ]; then
     docker rm dwe-controls --force
 fi
