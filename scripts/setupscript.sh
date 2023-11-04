@@ -68,7 +68,9 @@ if ! grep -q "$CONFIG_BT_STRING" "$CONFIG_FILE"; then
     echo "$CONFIG_BT_STRING" >> "$CONFIG_FILE"
 fi
 
-echo "[all]" >> "$CONFIG_FILE"
+if ! [ $(tail -n 1 "$CONFIG_FILE") = "[all]" ] ; then
+    echo "[all]" >> "$CONFIG_FILE"
+fi
 
 echo "Disabling services to speed up boot"
 systemctl disable snapd.service
