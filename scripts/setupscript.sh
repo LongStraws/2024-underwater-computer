@@ -56,7 +56,9 @@ systemctl start rov-client.service
 echo "Installation of ROV client was successful. Attached to 192.168.0.21:9000 with serial port /dev/ttyACM0"
 
 CONFIG_FILE=/boot/firmware/config.txt
-CONFIG_STRING=dtoverlay=disable-wifi\ndtoverlay=disable-bt\n[all]
+CONFIG_STRING="dtoverlay=disable-wifi
+dtoverlay=disable-bt
+[all]"
 
 echo "Disabling wifi and bluetooth"
 if ! grep -q "$CONFIG_STRING" $CONFIG_FILE; then
