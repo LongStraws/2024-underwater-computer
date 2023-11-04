@@ -10,4 +10,4 @@ After user creation and login, run `sudo apt update && sudo apt upgrade -y`, acc
 
 `curl https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/scope-1-ubuntu/scripts/setupscript.sh | sudo -E bash -`
 
-This will set the static IP on the pi to 192.168.0.20.
+This will set the static IP on the pi to 192.168.0.20 on the next reboot.
