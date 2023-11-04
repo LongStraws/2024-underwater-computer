@@ -28,6 +28,9 @@ curl -fsSL $DWE_REPO/docker/dwe-controls.service -o /usr/lib/systemd/system/dwe-
 
 KELPIE_REPO=https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/scope-1-dietPi
 
+echo "Installing pySerial"
+pip install pyserial
+
 echo "Installing ROV client"
 curl -fsSL --output-dir /opt --remote-name-all $KELPIE_REPO/clientClass.py $KELPIE_REPO/uart.py
 
