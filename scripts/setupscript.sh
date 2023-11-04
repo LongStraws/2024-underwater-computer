@@ -83,6 +83,8 @@ systemctl disable apparmor
 systemctl disable snapd.apparmor.service
 systemctl mask snapd.service
 
+systemctl disable wpa_supplicant.service
+
 if [ -f "/etc/systemd/system/iscsi.service." ] ; then
     systemctl disable iscsi.service
 fi
