@@ -6,7 +6,7 @@ This script configures ubuntu on raspberry pi with needed software for Kelpie 20
 
 Install [Ubuntu on raspberry pi](https://ubuntu.com/download/raspberry-pi/thank-you?version=23.10&architecture=server-arm64+raspi)
 
-After user creation and login, run `sudo apt update && sudo apt upgrade -y`, accept any prompts. Then reboot and enter this in bash:
+After user creation and login, run `sudo apt update && sudo apt upgrade -y`, accept any prompts. Then reboot and run this command:
 
 `curl https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/scope-1-ubuntu/scripts/setupscript.sh | sudo -E bash -`
 
