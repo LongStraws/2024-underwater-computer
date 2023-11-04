@@ -32,11 +32,8 @@ curl -fsSL $DWE_REPO/docker/dwe-controls.service -o /usr/lib/systemd/system/dwe-
 
 KELPIE_REPO=https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/scope-1-ubuntu
 
-echo "Installing pip"
-apt-get install pip
-
 echo "Installing pySerial"
-pip install pyserial
+apt-get install python3-serial
 
 echo "Installing ROV client"
 curl -fsSL --output-dir /opt --remote-name-all $KELPIE_REPO/clientClass.py $KELPIE_REPO/uart.py
@@ -47,9 +44,6 @@ if [ -f "$ROV_SERVICE_FILE" ] ; then
     rm "$ROV_SERVICE_FILE"
 fi
 curl -fsSL $KELPIE_REPO/scripts/rov-client.service -o /usr/lib/systemd/system/rov-client.service
-
-echo "Setting static IP"
-curl -fsSL $KELPIE_REPO/scripts/60_static_config.yaml -o /etc/netplan/60_static_config.yaml
 
 systemctl daemon-reload
 
