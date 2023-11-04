@@ -72,6 +72,8 @@ if ! [ $(tail -n 1 "$CONFIG_FILE") = "[all]" ] ; then
     echo "[all]" >> "$CONFIG_FILE"
 fi
 
+systemctl disable hciuart
+
 echo "Disabling services to speed up boot"
 systemctl disable snapd.service
 systemctl disable snapd.socket
@@ -80,8 +82,6 @@ systemctl disable snap.lxd.activate.service
 systemctl disable apparmor
 systemctl disable snapd.apparmor.service
 systemctl mask snapd.service
-
-systemctl disable hciuart
 
 if [ -f "/etc/systemd/system/iscsi.service." ] ; then
     systemctl disable iscsi.service
