@@ -55,15 +55,20 @@ systemctl enable rov-client.service
 systemctl start rov-client.service
 echo "Installation of ROV client was successful. Attached to 192.168.0.21:9000 with serial port /dev/ttyACM0"
 
-CONFIG_FILE=/boot/firmware/config.txt
-CONFIG_STRING="dtoverlay=disable-wifi
-dtoverlay=disable-bt
-[all]"
+CONFIG_FILE="/boot/firmware/config.txt"
+CONFIG_WIFI_STRING="dtoverlay=disable-wifi"
+CONFIG_BT_STRING="dtoverlay=disable-bt"
 
 echo "Disabling wifi and bluetooth"
-if ! grep -q "$CONFIG_STRING" $CONFIG_FILE; then
-    echo -e "$CONFIG_STRING" >> $CONFIG_FILE
+if ! grep -q "$CONFIG_WIFI_STRING" "$CONFIG_FILE"; then
+    echo "$CONFIG_WIFI_STRING" >> "$CONFIG_FILE"
 fi
+
+if ! grep -q "$CONFIG_BT_STRING" "$CONFIG_FILE"; then
+    echo "$CONFIG_BT_STRING" >> "$CONFIG_FILE"
+fi
+
+echo "[all]" >> "$CONFIG_FILE"
 
 echo "Disabling services to speed up boot"
 systemctl disable snapd.service
