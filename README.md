@@ -6,4 +6,4 @@ This repository contains files needed to autosetup dietPi on Raspberry Pi for Ke
 
 Place dietpi.txt in the boot partition of dietPi SD card and boot.
 
-The IP will be statically set to 192.168.0.20.
+After setup is complete, use `dietpi-config` to enable static IP address.
