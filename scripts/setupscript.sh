@@ -55,6 +55,14 @@ systemctl enable rov-client.service
 systemctl start rov-client.service
 echo "Installation of ROV client was successful. Attached to 192.168.0.21:9000 with serial port /dev/ttyACM0"
 
+echo "Disabling services to speed up boot"
+systemctl disable snapd.service
+systemctl disable snapd.socket
+systemctl disable snapd.seeded.service
+systemctl disable apparmor
+systemctl disable snapd.apparmor.service
+systemctl mask snapd.service
+
 touch /etc/cloud/cloud-init.disabled
 
 echo "Done. Upon next reboot system will have ip 192.168.0.20."
