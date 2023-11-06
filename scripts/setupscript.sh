@@ -30,7 +30,7 @@ if [ -f "$DWE_SERVICE_FILE" ] ; then
 fi
 curl -fsSL $DWE_REPO/docker/dwe-controls.service -o /usr/lib/systemd/system/dwe-controls.service
 
-KELPIE_REPO=https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/scope-1-ubuntu
+KELPIE_REPO=https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/ubuntu-jreik
 
 echo "Installing ROV client"
 curl -fsSL --output-dir /opt --remote-name-all $KELPIE_REPO/clientClass.py $KELPIE_REPO/uart.py
@@ -54,40 +54,6 @@ echo "Installation of dwe-controls with docker was successful. Please navigate t
 systemctl enable rov-client.service
 systemctl start rov-client.service
 echo "Installation of ROV client was successful. Attached to 192.168.0.21:9000 with serial port /dev/ttyACM0"
-
-CONFIG_FILE="/boot/firmware/config.txt"
-CONFIG_WIFI_STRING="dtoverlay=disable-wifi"
-CONFIG_BT_STRING="dtoverlay=disable-bt"
-
-echo "Disabling wifi and bluetooth"
-if ! grep -q "$CONFIG_WIFI_STRING" "$CONFIG_FILE"; then
-    echo "$CONFIG_WIFI_STRING" >> "$CONFIG_FILE"
-fi
-
-if ! grep -q "$CONFIG_BT_STRING" "$CONFIG_FILE"; then
-    echo "$CONFIG_BT_STRING" >> "$CONFIG_FILE"
-fi
-
-if ! [ $(tail -n 1 "$CONFIG_FILE") = "[all]" ] ; then
-    echo "[all]" >> "$CONFIG_FILE"
-fi
-
-systemctl disable hciuart
-
-echo "Disabling services to speed up boot"
-systemctl disable snapd.service
-systemctl disable snapd.socket
-systemctl disable snapd.seeded.service
-systemctl disable snap.lxd.activate.service
-systemctl disable apparmor
-systemctl disable snapd.apparmor.service
-systemctl mask snapd.service
-
-systemctl disable wpa_supplicant.service
-
-if [ -f "/etc/systemd/system/iscsi.service." ] ; then
-    systemctl disable iscsi.service
-fi
 
 touch /etc/cloud/cloud-init.disabled
 
