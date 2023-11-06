@@ -8,6 +8,6 @@ Install [Ubuntu on raspberry pi](https://ubuntu.com/download/raspberry-pi/thank-
 
 After user creation and login, run `sudo apt update && sudo apt upgrade -y`, accept any prompts. Then reboot and run this command:
 
-`curl -fsSL https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/scope-1-ubuntu/scripts/setupscript.sh | sudo -E bash -`
+`curl -fsSL https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/ubuntu-jreik/scripts/setupscript.sh | sudo -E bash -`
 
 This will set the static IP on the pi to 192.168.0.20 on the next reboot.
