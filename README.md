@@ -12,7 +12,9 @@ This repository contains files needed to auto-configure dietPi on Raspberry Pi f
       write the image to the SD card. Alternatively on a UNIX-like system you can use `unxz` to 
       decompress the file, and then write it with `dd` after determining the location of the SD card 
       with `lsblk`:
+
          `sudo dd if=DietKelPi_RPi-ARMv8-Bookworm.img of=/dev/sdX bs=4M status=progress`
+         
       (replace X with the letter of the card).
 
    3. The image has a default static IP address of 192.168.0.20. This will work with the NAT setup 
