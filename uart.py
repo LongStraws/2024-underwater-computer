@@ -1,23 +1,28 @@
+import argparse
 import serial
-import clientClass
+import clients
 import threading
 
-baudrate = 115200
-statusPin = 16
+parser = argparse.ArgumentParser()
+parser.add_argument('-p', '--port',      type=str, default='/dev/ttyACM0')
+parser.add_argument('-b', '--baud',      type=int, default=115200)
+parser.add_argument('-h', '--host',      type=str, default="192.168.0.21:9000")
+parser.add_argument('-s', '--statusPin', type=int, default=None) # Change default for prod
+parser.add_argument('-d', '--debug', action='store_true')
+args = parser.parse_args()
 
 def start_UART_relay(_serial, _client, _printable=False):
-        while True:
-            if _serial.in_waiting <= 0: continue
-            message = _serial.readline()
-            if _printable and (b'#AAM' in message): print(message)
-            _client.send(message)
+    while True:
+        if _serial.in_waiting <= 0: continue
+        message = _serial.readline()
+        if _printable and (b'#AAM' in message): print(message) # TODO: What's b'#AAM'?
+        _client.send(message)
 
-serial_mcu = serial.Serial('/dev/ttyACM0', baudrate, timeout=1)
-#debug_mcu = serial.Serial('/dev/ttyAMA1', baudrate, timeout=1)
+serial_mcu = serial.Serial(args.port, args.debug, timeout=1)
+#debug_mcu = serial.Serial('/dev/ttyAMA1', args.debug, timeout=1)
 
-thread_alive = True
-
-client = clientClass.TCPClient("192.168.0.21", 9000, serial_mcu, statusPin)
+address, port = args.host.split(":")
+client = clients.TCPClient(address, port, serial_mcu, args.statusPin, args.debug)
 
 ## Uncomment for third serial connection, used for debug
 # debug = serial.Serial('/dev/serial0', 115200)
