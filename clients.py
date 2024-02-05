@@ -72,9 +72,10 @@ class TCPClient:
         if not self.connected:
             print("Send failed - not connected.")
             return
+        
+        if(self.debug): print(f"Received message from microcontroller: \"{data}\". Sending to topside...")
         try:    
             self.client.sendall(data)
-            if(self.debug): print(data)
         except Exception as e:
             print(e)
             print("Send failed.")
