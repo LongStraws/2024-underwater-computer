@@ -22,7 +22,7 @@ serial_mcu = serial.Serial(args.port, args.debug, timeout=1)
 #debug_mcu = serial.Serial('/dev/ttyAMA1', args.debug, timeout=1)
 
 address, port = args.host.split(":")
-client = clients.TCPClient(address, port, serial_mcu, args.statusPin, args.debug)
+client = clients.TCPClient(address, int(port), serial_mcu, args.statusPin, args.debug)
 
 ## Uncomment for third serial connection, used for debug
 # debug = serial.Serial('/dev/serial0', 115200)
