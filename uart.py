@@ -6,7 +6,7 @@ import threading
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--port',      type=str, default='/dev/ttyACM0')
 parser.add_argument('-b', '--baud',      type=int, default=115200)
-parser.add_argument('-h', '--host',      type=str, default="192.168.0.21:9000")
+parser.add_argument( '--host',           type=str, default="192.168.0.21:9000")
 parser.add_argument('-s', '--statusPin', type=int, default=None) # Change default for prod
 parser.add_argument('-d', '--debug', action='store_true')
 args = parser.parse_args()
