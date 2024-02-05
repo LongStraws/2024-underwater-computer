@@ -26,13 +26,14 @@ if [ -f "$DWE_SERVICE_FILE" ] ; then
 fi
 curl -fsSL $DWE_REPO/docker/dwe-controls.service -o /usr/lib/systemd/system/dwe-controls.service
 
-KELPIE_REPO=https://raw.githubusercontent.com/KelpieRobotics/2024-underwater-computer/scope-1-dietPi
+KELPIE_REPO=https://github.com/KelpieRobotics/2024-underwater-computer/scope-1-dietPi-Fufs
 
 echo "Installing pySerial"
 pip install pyserial
 
 echo "Installing ROV client"
-curl -fsSL --output-dir /opt --remote-name-all $KELPIE_REPO/clientClass.py $KELPIE_REPO/uart.py
+apt install git python3-rpi.gpio
+git clone $KELPIE_REPO /opt
 
 echo "Installing rov client service"
 ROV_SERVICE_FILE="/usr/lib/systemd/system/rov-client.service"
