@@ -74,6 +74,7 @@ class TCPClient:
             return
         try:    
             self.client.sendall(data)
+            if(self.debug): print(data)
         except Exception as e:
             print(e)
             print("Send failed.")
