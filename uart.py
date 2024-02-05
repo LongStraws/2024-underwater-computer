@@ -18,8 +18,8 @@ def start_UART_relay(_serial, _client, _printable=False):
         if _printable and (b'#AAM' in message): print(message) # TODO: What's b'#AAM'?
         _client.send(message)
 
-serial_mcu = serial.Serial(args.port, args.debug, timeout=1)
-#debug_mcu = serial.Serial('/dev/ttyAMA1', args.debug, timeout=1)
+serial_mcu = serial.Serial(args.port, args.baud, timeout=1)
+#debug_mcu = serial.Serial('/dev/ttyAMA1', args.baud, timeout=1)
 
 address, port = args.host.split(":")
 client = clients.TCPClient(address, int(port), serial_mcu, args.statusPin, args.debug)
