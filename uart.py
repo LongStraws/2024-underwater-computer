@@ -4,7 +4,7 @@ import clients
 import threading
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-p', '--port',      type=str, default='/dev/ttyACM0')
+parser.add_argument('--device',      type=str, default='/dev/ttyACM0')
 parser.add_argument('-b', '--baud',      type=int, default=115200)
 parser.add_argument('--host',           type=str, default="192.168.137.1:9000")
 parser.add_argument('-s', '--statusPin', type=int, default=None) # Change default for prod
@@ -18,7 +18,7 @@ def start_UART_relay(_serial, _client, _printable=False):
         if _printable and (b'#AAM' in message): print(message) # TODO: What's b'#AAM'?
         _client.send(message)
 
-serial_mcu = serial.Serial(args.port, args.baud, timeout=1)
+serial_mcu = serial.Serial(args.device, args.baud, timeout=1)
 #debug_mcu = serial.Serial('/dev/ttyAMA1', args.baud, timeout=1)
 
 address, port = args.host.split(":")
