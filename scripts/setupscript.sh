@@ -75,4 +75,4 @@ apt update
 apt install ros-humble-desktop
 
 
-echo "Done. Upon next reboot system will have ip 192.168.0.20."
+echo "Done. Upon next reboot system will have ip 192.168.137.20."
