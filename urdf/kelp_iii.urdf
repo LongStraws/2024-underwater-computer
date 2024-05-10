@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<robot name="kelp_iii" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- Parameters -->
+    <xacro:property name="frame_length" value="0.45"/>
+    <xacro:property name="frame_width" value="0.3"/>
+    <xacro:property name="frame_height" value="0.25"/>
+
+    <xacro:property name="thruster_radius" value="0.05"/>
+    <xacro:property name="thruster_length" value="0.1"/>
+    <xacro:property name="thruster_side_offset" value="0.025"/>
+    <xacro:property name="thruster_corner_offset" value="0.05"/>
+  
+    <!-- Constants -->
+    <xacro:property name="sqrt2" value="1.4142"/>
+
+    <!-- Frame -->
+    <link name="frame_link">
+        <visual>
+            <geometry>
+                <box size="${frame_length} ${frame_width} ${frame_height}"/>
+            </geometry>
+            <material name="Black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <!-- Footprint -->
+    <link name="footprint_link"/>
+    <joint name="footprint_joint" type="fixed">
+        <parent link="frame_link"/>
+        <child link="footprint_link"/>
+        <origin xyz="0.0 0.0 ${-(frame_height/2)}" rpy="0 0 0"/>
+    </joint>
+          
+    <!-- Thrusters -->
+    <xacro:macro name="thruster" params="prefix pos_x pos_y roll yaw">
+        <link name="${prefix}_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="${roll} 0 ${yaw}"/>
+                <geometry>
+                    <cylinder radius="${thruster_radius}" length="${thruster_length}"/>
+                </geometry>
+                <material name="Cyan">
+                    <color rgba="0 1 1 1"/>
+                </material>
+            </visual>
+        </link>
+
+        <joint name="${prefix}_joint" type="fixed">
+            <parent link="frame_link"/>
+            <child link="${prefix}_link"/>
+            <origin xyz="${pos_x} ${pos_y} 0" rpy="0 0 0"/>
+            <axis xyz="0 0 0"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:thruster prefix="thruster_1" pos_x="${frame_length/2+thruster_radius+thruster_side_offset}" pos_y="0" roll="0" yaw="0"/>
+    <xacro:thruster prefix="thruster_2" pos_x="0" pos_y="${frame_width/2+thruster_radius+thruster_side_offset}" roll="0" yaw="0"/>
+    <xacro:thruster prefix="thruster_3" pos_x="${-(frame_length/2+thruster_radius+thruster_side_offset)}" pos_y="0" roll="0" yaw="0"/>
+    <xacro:thruster prefix="thruster_4" pos_x="0" pos_y="${-(frame_width/2+thruster_radius+thruster_side_offset)}" roll="0" yaw="0"/>
+    <xacro:thruster prefix="thruster_5" pos_x="${frame_length/2+(thruster_radius+thruster_corner_offset)/sqrt2}" pos_y="${frame_width/2+(thruster_radius+thruster_corner_offset)/sqrt2}" roll="${pi/2}" yaw="${pi/4}"/>
+    <xacro:thruster prefix="thruster_6" pos_x="${frame_length/2+(thruster_radius+thruster_corner_offset)/sqrt2}" pos_y="${-(frame_width/2+(thruster_radius+thruster_corner_offset)/sqrt2)}" roll="${pi/2}" yaw="${-pi/4}"/>
+    <xacro:thruster prefix="thruster_7" pos_x="${-(frame_length/2+(thruster_radius+thruster_corner_offset)/sqrt2)}" pos_y="${frame_width/2+(thruster_radius+thruster_corner_offset)/sqrt2}" roll="${pi/2}" yaw="${-pi/4}"/>
+    <xacro:thruster prefix="thruster_8" pos_x="${-(frame_length/2+(thruster_radius+thruster_corner_offset)/sqrt2)}" pos_y="${-(frame_width/2+(thruster_radius+thruster_corner_offset)/sqrt2)}" roll="${pi/2}" yaw="${pi/4}"/>
+
+</robot>
