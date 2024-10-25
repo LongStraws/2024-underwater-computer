@@ -1,0 +1,11 @@
+[Unit]
+Description= Start Gstreamer & Cameras Service
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/start-gstreamer.sh #tempfile path
+Restart=on-failure
+
+
+[Install]
+WantedBy=multi-user.target
